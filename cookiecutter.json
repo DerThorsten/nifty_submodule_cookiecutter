@@ -1,0 +1,14 @@
+{
+    "author_name": "Thorsten Beier",
+    "author_email": "thorsten.beier@iwr.uni-heidelberg.de",
+    "project_name":             "nifty tools submodule",
+    "submod_name":              "{{ cookiecutter.project_name|replace(' ', '_') }}",
+    "project_slug":             "nifty_{{ cookiecutter.submod_name }}",
+    "cpp_submod_namespace":     "{{ cookiecutter.submod_name }}",
+    "cpp_submod_folder_name":   "{{ cookiecutter.submod_name }}",
+    "cpp_macro_prefix":         "NIFTY_{{ cookiecutter.submod_name|upper|replace(' ', '_')|replace('-', '_') }}",
+    "cmake_project_name":       "nifty_{{ cookiecutter.submod_name }}",
+    "github_project_name":      "nifty_{{ cookiecutter.submod_name }}",
+    "github_organization_name": "DerThorsten",
+    "project_short_description": ""
+}
