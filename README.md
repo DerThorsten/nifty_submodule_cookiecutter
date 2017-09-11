@@ -1,7 +1,3 @@
-![cookicutter-logo](./cookiecutter.png)
-
-
-
 [![Build Status](https://travis-ci.org/DerThorsten/xtensor-cpp-cookiecutter.svg?branch=master)](https://travis-ci.org/DerThorsten/xtensor-cpp-cookiecutter)
 [![Build status](https://ci.appveyor.com/api/projects/status/hqaaw6wpwr86yv5v/branch/master?svg=true)](https://ci.appveyor.com/project/DerThorsten/xtensor-cpp-cookiecutter/branch/master)
 
