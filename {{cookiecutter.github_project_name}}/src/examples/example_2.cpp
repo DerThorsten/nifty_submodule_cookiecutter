@@ -1,6 +1,6 @@
-#include "{{cookiecutter.cpp_root_folder_name}}/{{cookiecutter.package_name}}.hpp"
+#include "nifty/{{cookiecutter.cpp_submod_folder_name}}/{{ cookiecutter.submod_name  }}.hpp"
 
 
 int main(){
-    auto res = {{cookiecutter.cpp_root_folder_name}}::helloWorld();
+    auto res = nifty::{{cookiecutter.cpp_submod_namespace}}::hello_world();
 }

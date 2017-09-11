@@ -9,7 +9,7 @@ namespace nifty{
 namespace {{ cookiecutter.cpp_submod_namespace }} {
 
 
-    bool helloWorld(){
+    bool hello_world(){
         return true;
     }
 

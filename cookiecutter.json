@@ -2,7 +2,7 @@
     "author_name": "Thorsten Beier",
     "author_email": "thorsten.beier@iwr.uni-heidelberg.de",
     "project_name":             "nifty tools submodule",
-    "submod_name":              "{{ cookiecutter.project_name|replace(' ', '_') }}",
+    "submod_name":              "tools",
     "project_slug":             "nifty_{{ cookiecutter.submod_name }}",
     "cpp_submod_namespace":     "{{ cookiecutter.submod_name }}",
     "cpp_submod_folder_name":   "{{ cookiecutter.submod_name }}",

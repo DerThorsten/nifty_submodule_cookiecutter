@@ -36,13 +36,13 @@ add_dependencies(externl_headers_test
 # Add Unit Tests
 #-------------------------------------------------------------------------------------------------------------------
 file(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
-list(REMOVE_ITEM files "{{ cookiecutter.package_name }}")
+list(REMOVE_ITEM files "test_nifty_{{ cookiecutter.submod_name }}")
 
 # test executable
-add_executable(test_{{ cookiecutter.package_name }} test_{{ cookiecutter.package_name }}.cpp ${files})
+add_executable(test_nifty_{{ cookiecutter.submod_name }} test_nifty_{{ cookiecutter.submod_name }}.cpp ${files})
 
 # declare the executable as test
-add_test(NAME test_{{ cookiecutter.package_name }} COMMAND test_{{ cookiecutter.package_name }})
+add_test(NAME test_nifty_{{ cookiecutter.submod_name }} COMMAND test_nifty_{{ cookiecutter.submod_name }})
 
 # add dependencies 
-add_dependencies(test_{{ cookiecutter.package_name }} externl_headers_test)
+add_dependencies(test_nifty_{{ cookiecutter.submod_name }} externl_headers_test)
