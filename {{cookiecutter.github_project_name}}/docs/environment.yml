@@ -1,0 +1,7 @@
+name: nifty-{{ cookiecutter.submod_name }}-docs
+
+channels:
+  - conda-forge
+
+dependencies:
+  - breathe

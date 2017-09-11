@@ -10,5 +10,6 @@
     "cmake_project_name":       "nifty_{{ cookiecutter.submod_name }}",
     "github_project_name":      "nifty_{{ cookiecutter.submod_name }}",
     "github_organization_name": "DerThorsten",
-    "project_short_description": ""
+    "project_short_description": "",
+    "version" : "0.1.0"
 }

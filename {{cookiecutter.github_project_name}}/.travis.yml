@@ -6,74 +6,82 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - deadsnakes
           packages:
+            - cmake
             - g++-4.9
-      env: COMPILER=gcc GCC=4.9 PY=3
+      env: COMPILER=gcc GCC=4.9
     - os: linux
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - deadsnakes
           packages:
+            - cmake
             - g++-5
-      env: COMPILER=gcc GCC=5 PY=3
+      env: COMPILER=gcc GCC=5
+
     - os: linux
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-          packages:
-            - g++-5
-      env: COMPILER=gcc GCC=5 PY=2
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
+            - deadsnakes
             - llvm-toolchain-precise-3.6
           packages:
+            - cmake
             - clang-3.6
-      env: COMPILER=clang CLANG=3.6 PY=3
+      env: COMPILER=clang CLANG=3.6
     - os: linux
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - deadsnakes
             - llvm-toolchain-precise-3.7
           packages:
+            - cmake
             - clang-3.7
-      env: COMPILER=clang CLANG=3.7 PY=3
-    #- os: linux
-    #  addons:
-    #    apt:
-    #      sources:
-    #        - ubuntu-toolchain-r-test
-    #        - llvm-toolchain-precise-3.8
-    #      packages:
-    #        - clang-3.8
-    #  env: COMPILER=clang CLANG=3.8 PY=3
-    #- os: linux
-    #  addons:
-    #    apt:
-    #      sources:
-    #        - ubuntu-toolchain-r-test
-    #        - llvm-toolchain-precise-3.9
-    #      packages:
-    #        - clang-3.9
-    #  env: COMPILER=clang CLANG=3.9 PY=3
-    #- os: linux
-    #  addons:
-    #    apt:
-    #      sources:
-    #        - ubuntu-toolchain-r-test
-    #        - llvm-toolchain-precise-4.0
-    #      packages:
-    #        - clang-4.0
-    #  env: COMPILER=clang CLANG=4.0 PY=3
+      env: COMPILER=clang CLANG=3.7
+    - os: linux
+      addons:
+       apt:
+         sources:
+           - ubuntu-toolchain-r-test
+           - deadsnakes
+           - llvm-toolchain-precise-3.8
+         packages:
+           - - cmake
+           - clang-3.8
+      env: COMPILER=clang CLANG=3.8
+    - os: linux
+      addons:
+       apt:
+         sources:
+           - ubuntu-toolchain-r-test
+           - deadsnakes
+           - llvm-toolchain-precise-3.9
+         packages:
+           - cmake
+           - clang-3.9
+      env: COMPILER=clang CLANG=3.9
+    - os: linux
+      addons:
+       apt:
+         sources:
+           - ubuntu-toolchain-r-test
+           - deadsnakes
+           - llvm-toolchain-precise-4.0
+         packages:
+           - clang-4.0
+           - cmake
+      env: COMPILER=clang CLANG=4.0
     - os: osx
       osx_image: xcode8
       compiler: clang
-      env: PY=3
+
+
 env:
   global:
     - MINCONDA_VERSION="latest"
@@ -90,21 +98,19 @@ before_install:
           export CXX=clang++-$CLANG CC=clang-$CLANG;
         fi
       elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        export CXX=clang++ CC=clang PYTHONHOME=$HOME/miniconda;
+        export CXX=clang++ CC=clang;
       fi
     
 install:
-    # Download and update miniconda
+    # Define the version of miniconda to download
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         MINCONDA_OS=$MINCONDA_LINUX;
       elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
         MINCONDA_OS=$MINCONDA_OSX;
-      fi
-    - if [[ "$PY" == "3" ]]; then
-          wget "http://repo.continuum.io/miniconda/Miniconda3-$MINCONDA_VERSION-$MINCONDA_OS.sh" -O miniconda.sh;
-      else
-          wget "http://repo.continuum.io/miniconda/Miniconda2-$MINCONDA_VERSION-$MINCONDA_OS.sh" -O miniconda.sh;
-      fi
+    fi
+
+    - wget "http://repo.continuum.io/miniconda/Miniconda3-$MINCONDA_VERSION-$MINCONDA_OS.sh" -O miniconda.sh;
+
     - bash miniconda.sh -b -p $HOME/miniconda
     - export PATH="$HOME/miniconda/bin:$PATH"
     - hash -r
@@ -112,13 +118,7 @@ install:
     - conda clean --packages
     - conda update -q conda
     - conda info -a
-    
-
-    # Install cookiecutter and  boost
-    - conda install cookiecutter boost -c conda-forge
-    # Run cookiecutter in build director
-
-
-    - mkdir build
-    - cd build
-    - cookiecutter $TRAVIS_BUILD_DIR --no-input
+    - conda install boost -c conda-forge
+    - cmake .
+    - make -j 2
+    - CTEST_OUTPUT_ON_FAILURE=TRUE make test
