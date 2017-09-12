@@ -108,6 +108,7 @@ script:
       elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
         MINCONDA_OS=$MINCONDA_OSX;
       fi
+
     - wget "http://repo.continuum.io/miniconda/Miniconda3-$MINCONDA_VERSION-$MINCONDA_OS.sh" -O miniconda.sh;
     - bash miniconda.sh -b -p $HOME/miniconda
     - export PATH="$HOME/miniconda/bin:$PATH"
